@@ -15,7 +15,8 @@ var User = class {
 }
 
 var Tweet = class {
-    constructor(text) {
+    constructor(user, text) {
+        this.user = user
         this.text = text
         this.likes = []
     }
@@ -40,8 +41,8 @@ var Like = class {
 var andrea = new User('Andrea')
 var anna = new User('Anna')
 var tom = new User('Tom')
-var tweetOne = new Tweet('Hello world')
-var tweetTwo = new Tweet('Second one')
+var tweetOne = new Tweet(andrea, 'Hello world')
+var tweetTwo = new Tweet(andrea, 'Second one')
 var likeOne = new Like(andrea, tweetOne)
 var likeTwo = new Like(anna, tweetTwo)
 var likeThree = new Like(tom, tweetOne)
