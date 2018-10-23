@@ -26,7 +26,8 @@ tom.create(tweetThree)
 likeFour.like(andrea, tweetThree)
 likeFive.like(anna, tweetThree)
 
-Database.save(andrea)
+Database.save([andrea,anna,tom])
+console.log(Database.load())
 
 
 

@@ -7,6 +7,6 @@ module.exports = {
    },
 
    load() {
-       return JSON.parse(fs.readFileSync('data.json'))
+       return CircularJSON.parse(fs.readFileSync('data.json'))
    }
 }
