@@ -1,67 +1,32 @@
-var User = class {
-    constructor(name) {
-        this.name = name
-        this.tweets = []
-    }
-    create(tweet) {
-        this.tweets.push(tweet)
-    }
-    delete(tweet) {
-        const index = this.tweets.indexOf(tweet)
-        if (index !== -1) {
-            this.tweets.splice(index, 1)
-        }
-    }
-}
+const User = require('./user')
+const Tweet = require('./tweet')
+const Like = require('./like')
+const Database = require('./database')
 
-var Tweet = class {
-    constructor(user, text) {
-        this.user = user
-        this.text = text
-        this.likes = []
-    }
-}
-
-var Like = class {
-    constructor(user, tweet) {
-        this.user = user
-        this.tweet = tweet
-    }
-    like(user, tweet) {
-        tweet.likes.push(user)
-    }
-    dislike(user, tweet) {
-        const index = tweet.likes.indexOf(user)
-        if (index !== -1) {
-            tweet.likes.splice(index, 1)
-        }
-    }
-}
-
-var andrea = new User('Andrea')
-var anna = new User('Anna')
-var tom = new User('Tom')
-var tweetOne = new Tweet(andrea, 'Hello world')
-var tweetTwo = new Tweet(andrea, 'Second one')
-var likeOne = new Like(andrea, tweetOne)
-var likeTwo = new Like(anna, tweetTwo)
-var likeThree = new Like(tom, tweetOne)
+const andrea = new User('Andrea')
+const anna = new User('Anna')
+const tom = new User('Tom')
+const tweetOne = new Tweet(andrea, 'Hello world')
+const tweetTwo = new Tweet(andrea, 'Second one')
+const tweetThree = new Tweet(tom, "First Tom's tweet")
+const likeOne = new Like(anna, tweetOne)
+const likeTwo = new Like(anna, tweetTwo)
+const likeThree = new Like(tom, tweetOne)
+const likeFour = new Like(andrea, tweetThree)
+const likeFive = new Like(anna, tweetThree)
 
 andrea.create(tweetOne)
-likeOne.like(andrea, tweetOne)
+likeOne.like(anna, tweetOne)
 andrea.create(tweetTwo)
 likeTwo.like(anna, tweetTwo)
 likeThree.like(tom, tweetOne)
-
-console.log(andrea)
-//console.log(likeOne)
-console.log(tweetOne)
-console.log(tweetTwo)
-
 likeTwo.dislike(anna, tweetTwo)
-
-console.log(tweetTwo)
-
 andrea.delete(tweetTwo)
+tom.create(tweetThree)
+likeFour.like(andrea, tweetThree)
+likeFive.like(anna, tweetThree)
 
-console.log(andrea)
+Database.save(andrea)
+
+
+
