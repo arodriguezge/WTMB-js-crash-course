@@ -21,13 +21,12 @@ andrea.create(tweetTwo)
 likeTwo.like(anna, tweetTwo)
 likeThree.like(tom, tweetOne)
 likeTwo.dislike(anna, tweetTwo)
-andrea.delete(tweetTwo)
 tom.create(tweetThree)
 likeFour.like(andrea, tweetThree)
 likeFive.like(anna, tweetThree)
 
-Database.save([andrea,anna,tom])
-console.log(Database.load())
-
-
+Database.save([tweetOne, tweetTwo, tweetThree])
+const loadedTweets = Database.load()
+const tweetInstances = loadedTweets.map(Tweet.create)
+console.log(tweetInstances)
 

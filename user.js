@@ -12,4 +12,7 @@ module.exports = class User {
             this.tweets.splice(index, 1)
         }
     }
+    static create({name, tweets}) {
+        return new User(name, tweets)
+    }
 }
