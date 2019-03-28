@@ -18,7 +18,12 @@
   "homepage": "https://github.com/arodriguezge/js-crash-course#readme",
   "dependencies": {
     "all": "0.0.0",
-    "circular-json": "^0.5.8"
+    "body-parser": "^1.18.3",
+    "circular-json": "^0.5.8",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.20",
+    "morgan": "^1.9.1",
+    "pug": "^2.0.3"
   },
   "devDependencies": {}
 }

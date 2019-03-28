@@ -1,1 +1,0 @@
-[{"user":{"name":"Andrea","tweets":["~0",{"user":"~0~user","text":"Second one","likes":[]}]},"text":"Hello world","likes":[{"name":"Anna","tweets":[]},{"name":"Tom","tweets":[{"user":"~0~likes~1","text":"First Tom's tweet","likes":["~0~user","~0~likes~0"]}]}]},"~0~user~tweets~1","~0~likes~1~tweets~0"]

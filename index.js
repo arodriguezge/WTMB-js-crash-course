@@ -1,44 +1,26 @@
-const User = require('./user')
-const Tweet = require('./tweet')
-const Like = require('./like')
-const Database = require('./database')
+const express = require('express')
+const bodyParser = require('body-parser')
+const logger = require('morgan')
 
-const main = async () => {
-    const andrea = new User('Andrea')
-    const anna = new User('Anna')
-    const tom = new User('Tom')
-    const tweetOne = new Tweet(andrea, 'Hello world')
-    const tweetTwo = new Tweet(andrea, 'Second one')
-    const tweetThree = new Tweet(tom, "First Tom's tweet")
-    const likeOne = new Like(anna, tweetOne)
-    const likeTwo = new Like(anna, tweetTwo)
-    const likeThree = new Like(tom, tweetOne)
-    const likeFour = new Like(andrea, tweetThree)
-    const likeFive = new Like(anna, tweetThree)
+const indexRouter = require('./routes/index')
+const userRouter = require('./routes/users')
+const tweetRouter = require('./routes/tweets')
+const likeRouter = require('./routes/likes')
 
-    andrea.create(tweetOne)
-    likeOne.like(anna, tweetOne)
-    andrea.create(tweetTwo)
-    likeTwo.like(anna, tweetTwo)
-    likeThree.like(tom, tweetOne)
-    likeTwo.dislike(anna, tweetTwo)
-    tom.create(tweetThree)
-    likeFour.like(andrea, tweetThree)
-    likeFive.like(anna, tweetThree)
+require('./mongo-connection')
 
-    await Database.save([tweetOne, tweetTwo, tweetThree])
-    const loadedTweets = await Database.load('./data.json')
-    const tweetInstances = loadedTweets.map(Tweet.create)
-    console.log(tweetInstances)
-}
+const port = process.env.PORT || 5000
 
-(async () => {
-    try {
-        await main()
-    } catch (e) {
-        console.log(e)
-    }
-  })()
+const app = express()
+
+app.set('view engine', 'pug')
+app.use(logger('dev'))
+app.use(bodyParser.json())
+
+app.use('/', indexRouter)
+app.use('/api/users', userRouter)
+app.use('/api/tweets', tweetRouter)
+app.use('/api/likes', likeRouter)
 
 
-
+app.listen(port, () => console.log(`Server started on port ${port}`))
